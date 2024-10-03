@@ -1,0 +1,65 @@
+{
+  "Day1": [
+    {
+      "seqno": 1,
+      "japanese": "会う",
+      "tones": "あう",
+      "translation": "會見、會面"
+    },
+    {
+      "seqno": 2,
+      "japanese": "開く",
+      "tones": "あく",
+      "translation": "打開、開啟"
+    },
+    {
+      "seqno": 3,
+      "japanese": "閉まる",
+      "tones": "しまる",
+      "translation": "關閉、緊閉"
+    },
+    {
+      "seqno": 4,
+      "japanese": "遊ぶ",
+      "tones": "あそぶ",
+      "translation": "玩、玩耍、娛樂"
+    },
+    {
+      "seqno": 5,
+      "japanese": "洗う",
+      "tones": "あらう",
+      "translation": "洗、沖洗"
+    },
+    {
+      "seqno": 6,
+      "japanese": "ある",
+      "tones": "ある",
+      "translation": "在、存在、有"
+    },
+    {
+      "seqno": 7,
+      "japanese": "歩く",
+      "tones": "あるく",
+      "translation": "走"
+    },
+    {
+      "seqno": 8,
+      "japanese": "言う",
+      "tones": "いう",
+      "translation": "說、告訴"
+    },
+    {
+      "seqno": 9,
+      "japanese": "行く",
+      "tones": "いく",
+      "translation": "去"
+    },
+    {
+      "seqno": 10,
+      "japanese": "要る",
+      "tones": "いる",
+      "translation": "要、需要"
+    }
+  ],
+  "Day2": []
+}

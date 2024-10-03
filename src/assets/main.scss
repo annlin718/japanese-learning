@@ -1,0 +1,87 @@
+@import './base.css';
+@import './animation.scss';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+
+  .div-day-select {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    width: 50%;
+    margin: 0 auto;
+
+    #date-select {
+      // 下拉選單
+      margin-inline: 0 1rem;
+      flex-grow: 1;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      padding: 5px 0;
+    }
+
+    #btn-test {
+      font-weight: normal;
+      font-size: 1rem;
+      border: none;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      padding: 0 10px;
+      border-radius: 10px;
+
+      &:disabled {
+        background: #c8c8c8;
+        color: #999;
+      }
+    }
+  }
+
+  .div-day-verbs-test {
+    text-align: center;
+    margin-block: 30px;
+
+    .question-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .div-options-list {
+      margin: 30px auto;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+
+      button {
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        padding-block: 5px;
+        border: none;
+      }
+    }
+  }
+
+  .div-day-verbs-practice {
+    color: #494949;
+
+    ol {
+      margin-inline-start: 0px;
+      padding-inline-start: 0px;
+      line-height: 2rem;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+}

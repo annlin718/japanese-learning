@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(222, 222, 222);
+  color: #fff;
+  font-size: 20px;
+  color: #333;
+}
+
+.custom-ol {
+  counter-reset: item; /* 初始化計數器 */
+}
+
+.custom-ol li {
+  list-style: none; /* 隱藏預設的數字樣式 */
+  counter-increment: item; /* 計數器自動遞增 */
+}
+
+.custom-ol li::before {
+  content: counters(item, ".") ". "; /* 顯示計數器，並在數字後加上點與空格 */
+  font-weight: bold;
+  width: 2em;
+  display: inline-block;
+  text-align: right;
+  padding-right: 10px;
+  font-size: 0.8rem;
+  padding-left: 34%;
+}
+
+.custom-ol li:nth-child(-n + 9)::before {
+  content: "0" counters(item, ".") ". "; /* 為前 9 項補 0 */
+}

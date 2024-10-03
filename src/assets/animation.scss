@@ -1,0 +1,74 @@
+// 定義顏色變數
+$default-bg: #f0f0f0; // 預設背景顏色
+$duration: 1.5s; // 動畫持續時間
+
+@keyframes changeBackground_O {
+  0% {
+    background-color: $default-bg; // 開始顏色
+  }
+
+  10% {
+    background-color: greenyellow; // 0.2秒時設置為傳入的顏色
+  }
+
+  20% {
+    background-color: $default-bg; // 0.6秒時回到預設顏色
+  }
+
+  30% {
+    background-color: greenyellow; // 0.2秒時再次設置為傳入的顏色
+  }
+
+  40% {
+    background-color: $default-bg; // 0.6秒時回到預設顏色
+  }
+
+  50% {
+    background-color: greenyellow; // 0.4秒時仍然為傳入的顏色
+  }
+
+  100% {
+    background-color: $default-bg; // 結束顏色
+  }
+}
+
+@keyframes changeBackground_X {
+  0% {
+    background-color: $default-bg; // 開始顏色
+  }
+
+  10% {
+    background-color: #ff4545; // 0.2秒時設置為傳入的顏色
+  }
+
+  20% {
+    background-color: $default-bg; // 0.6秒時回到預設顏色
+  }
+
+  30% {
+    background-color: #ff4545; // 0.2秒時再次設置為傳入的顏色
+  }
+
+  40% {
+    background-color: $default-bg; // 0.6秒時回到預設顏色
+  }
+
+  50% {
+    background-color: #ff4545; // 0.4秒時仍然為傳入的顏色
+  }
+
+  100% {
+    background-color: $default-bg; // 結束顏色
+  }
+}
+
+// 使用 animate_OX 的類別
+.animate-X {
+  // 動態設置背景顏色並應用動畫
+  animation: changeBackground_X $duration forwards;
+}
+
+.animate-O {
+  // 動態設置背景顏色並應用動畫
+  animation: changeBackground_O $duration forwards;
+}
