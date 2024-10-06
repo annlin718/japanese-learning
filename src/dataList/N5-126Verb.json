@@ -61,5 +61,66 @@
       "translation": "要、需要"
     }
   ],
-  "Day2": []
+  "Day2": [
+    {
+      "seqno": 1,
+      "japanese": "歌う",
+      "tones": "うたう",
+      "translation": "唱"
+    },
+    {
+      "seqno": 2,
+      "japanese": "買う",
+      "tones": "かう",
+      "translation": "買"
+    },
+    {
+      "seqno": 3,
+      "japanese": "売る",
+      "tones": "うる",
+      "translation": "賣"
+    },
+    {
+      "seqno": 4,
+      "japanese": "置く",
+      "tones": "おく",
+      "translation": "放、放置"
+    },
+    {
+      "seqno": 5,
+      "japanese": "送る",
+      "tones": "おくる",
+      "translation": "發、發送"
+    },
+    {
+      "seqno": 6,
+      "japanese": "押す",
+      "tones": "おす",
+      "translation": "按"
+    },
+    {
+      "seqno": 7,
+      "japanese": "泳ぐ",
+      "tones": "およぐ",
+      "translation": "游泳"
+    },
+    {
+      "seqno": 8,
+      "japanese": "終わる",
+      "tones": "おわる",
+      "translation": "結束、完畢"
+    },
+    {
+      "seqno": 9,
+      "japanese": "返す",
+      "tones": "かえす",
+      "translation": "(返)還"
+    },
+    {
+      "seqno": 10,
+      "japanese": "帰る",
+      "tones": "かえる",
+      "translation": "回去"
+    }
+  ]
 }

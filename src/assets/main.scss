@@ -1,4 +1,4 @@
-@import './base.css';
+@import './base.scss';
 @import './animation.scss';
 
 #app {
@@ -48,25 +48,51 @@
     text-align: center;
     margin-block: 30px;
 
-    .question-text {
-      font-size: 1.5rem;
-      font-weight: bold;
+    .div-day-verbs-test-qinfo {
+      .question-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .div-options-list {
+        margin: 30px auto;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+
+        button {
+          font-size: 1rem;
+          cursor: pointer;
+          border-radius: 5px;
+          padding-block: 5px;
+          border: none;
+        }
+      }
     }
 
-    .div-options-list {
-      margin: 30px auto;
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1rem;
+    .div-day-verbs-test-result {
+      .result-item {
+        display: grid;
+        grid-template-columns: 1fr 2fr 3fr 3fr 1fr;
+        gap: 0;
 
-      button {
-        font-size: 1rem;
-        cursor: pointer;
-        border-radius: 5px;
-        padding-block: 5px;
-        border: none;
+        &.title {
+          >span {
+            background: #333;
+            color: #fff;
+            font-weight: bold;
+          }
+        }
+
+        >span {
+          outline: 1px solid #333;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          padding: 5px 0;
+        }
       }
     }
   }
@@ -83,5 +109,56 @@
     p {
       text-align: center;
     }
+  }
+}
+
+@include respond-to('mobile') {
+  html {
+    // font-size: 16px;
+  }
+
+  #app {
+    margin-inline: 5vw;
+    margin-block: 5vw;
+    padding: 0;
+
+    .div-day-select {
+      width: 100%;
+      // flex-direction: column;
+      // gap: 15px;
+
+      #date-select {
+        margin-inline: 0 0.5rem;
+      }
+
+      #btn-test {
+        width: auto;
+      }
+    }
+
+    .div-day-verbs-practice {
+      color: #494949;
+    }
+
+    .div-day-verbs-test {
+      .div-day-verbs-test-qinfo {
+        .div-options-list {
+          width: 100%;
+        }
+      }
+
+      .div-day-verbs-test-result {
+        .result-item {
+          >span {
+            font-size: 14px;
+            white-space: pre-wrap;
+          }
+        }
+      }
+    }
+  }
+
+  .custom-ol li::before {
+    padding-left: 0%;
   }
 }

@@ -4,13 +4,19 @@
   import audio_O from "./assets/O.mp3";
   import audio_X from "./assets/X.mp3";
 
-  // 取得所有日期的鍵，並設置響應式變數
+  let clickOpen = true;
+  const QContentElement = ref(null);
+  const QElement = ref(null);
+
   const availableDates = Object.keys(verbData); // 取得 JSON 中的所有日期
   const selectedDate = ref(availableDates[0]); // 預設選擇第一個日期
   const isTest = ref(false);
+  const isTestEnd = ref(false);
   const testQno = ref(1);
   // 用來保存打亂後的列表
   const shuffledList = ref([]);
+  // 紀錄測驗答題成果
+  const testResultList = ref([]);
 
   // 根據選擇的日期顯示對應的動詞列表
   const verbList = computed(() => {
@@ -55,25 +61,47 @@
     console.log("測驗模式啟動");
     isTest.value = !isTest.value;
 
+    // 清空測驗結果列表
+    isTestEnd.value = false;
+    testResultList.value = [];
+    testQno.value = 1;
+    clickOpen = true;
+
     const originalList = verbList.value;
     const copiedList = JSON.parse(JSON.stringify(originalList)); // 深拷貝
     shuffledList.value = shuffleArray(copiedList); // 打亂順序
   };
 
   const checkAns = (event) => {
+    if (!clickOpen) return;
+    clickOpen = false;
+
     // 透過事件對象來獲取 data-qno 的值
     const dataQno = event.target.dataset.qno; // 獲取 data-qno 的值
 
     let audio;
+    let isRight = false;
     if (shuffledList.value[0].seqno.toString() === dataQno.toString()) {
       // 答對
       audio = new Audio(audio_O);
       event.target.classList.add("animate-O");
+      isRight = true;
     } else {
       // 答錯
       audio = new Audio(audio_X);
       event.target.classList.add("animate-X");
     }
+
+    testResultList.value = [
+      ...testResultList.value,
+      {
+        qText: QElement.value.textContent,
+        ans:
+          shuffledList.value[0].japanese + `\n(${shuffledList.value[0].tones})`,
+        memberAns: event.target.textContent.replace(" (", "\n("),
+        result: isRight,
+      },
+    ];
 
     audio.play().catch((error) => {
       console.error("播放音檔時發生錯誤:", error);
@@ -83,13 +111,20 @@
       "animationend",
       function () {
         // 動畫結束後的操作
-        console.log("動畫結束了！");
         // 移除動畫類
         event.target.classList.remove("animate-X", "animate-O");
 
-        const firstElement = shuffledList.value.shift(); // 移除並獲取第一個元素
-        shuffledList.value.push(firstElement); // 將該元素添加到陣列末尾
-        testQno.value++;
+        if (testQno.value == shuffledList.value.length) {
+          // 題目出完了
+          console.log("END");
+          isTestEnd.value = true;
+        } else {
+          clickOpen = true;
+
+          const firstElement = shuffledList.value.shift(); // 移除並獲取第一個元素
+          shuffledList.value.push(firstElement); // 將該元素添加到陣列末尾
+          testQno.value++;
+        }
       },
       { once: true }
     );
@@ -100,29 +135,53 @@
   <div>
     <!-- 日期下拉選單 -->
     <div class="div-day-select">
-      <select id="date-select" v-model="selectedDate">
+      <select id="date-select" v-model="selectedDate" v-show="!isTest">
         <option v-for="date in availableDates" :key="date" :value="date">
           {{ date }}
         </option>
       </select>
-      <button id="btn-test" @click="enterTest">
+      <button id="btn-test" @click="enterTest" v-show="verbList.length > 0">
         {{ isTest ? "返回練習" : "測驗模式" }}
       </button>
     </div>
 
     <!-- 動詞練習 -->
-    <div class="div-day-verbs-test" v-if="isTest">
-      <p>{{ testQno }} / 10</p>
-      <span class="question-text">{{ shuffledList[0].translation }}</span>
-      <div class="div-options-list">
-        <button
-          v-for="item in shuffledOptionList"
-          :key="'btn' + item.seqno"
-          :data-qno="item.seqno"
-          @click="checkAns"
+    <div ref="QContentElement" class="div-day-verbs-test" v-if="isTest">
+      <div class="div-day-verbs-test-qinfo" v-show="!isTestEnd">
+        <p>{{ testQno }} / 10</p>
+        <span ref="QElement" class="question-text">{{
+          shuffledList[0].translation
+        }}</span>
+        <div class="div-options-list">
+          <button
+            v-for="item in shuffledOptionList"
+            :key="'btn' + item.seqno"
+            :data-qno="item.seqno"
+            @click="checkAns"
+          >
+            {{ item.japanese }} ({{ item.tones }})
+          </button>
+        </div>
+      </div>
+      <div class="div-day-verbs-test-result" v-show="isTestEnd">
+        <div class="result-item title">
+          <span>題號</span>
+          <span>題目</span>
+          <span>正確答案</span>
+          <span>你的答案</span>
+          <span></span>
+        </div>
+        <div
+          class="result-item"
+          v-for="(testInfo, index) in testResultList"
+          :key="'reslut' + index"
         >
-          {{ item.japanese }} ({{ item.tones }})
-        </button>
+          <span>{{ index + 1 }}</span>
+          <span>{{ testInfo.qText }}</span>
+          <span>{{ testInfo.ans }}</span>
+          <span>{{ testInfo.memberAns }}</span>
+          <span>{{ testInfo.result ? "O" : "X" }}</span>
+        </div>
       </div>
     </div>
 
@@ -130,7 +189,7 @@
     <div class="div-day-verbs-practice" v-else>
       <ol class="custom-ol" v-if="verbList.length > 0">
         <li v-for="item in verbList" :key="item.seqno">
-          {{ item.japanese }} ({{ item.tones }}) :
+          <b>{{ item.japanese }} ({{ item.tones }}) </b>:
           {{ item.translation }}
         </li>
       </ol>
