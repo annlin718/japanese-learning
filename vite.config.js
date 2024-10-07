@@ -6,7 +6,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: "/japanese-learning/",
+    // base: "/japanese-learning/",
+    base: "./",
     plugins: [
         vue(),
         vueJsx(),
